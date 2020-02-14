@@ -1,27 +1,24 @@
-Terraform module which creates Memcache database on Alibaba Cloud.  
-terraform-alicloud-memcache
-==================================================================================
+ terraform-alicloud-memcache
+=====================================================================
 
-English | [简体中文](https://github.com/terraform-alicloud-modules/terraform-alicloud-memcache/blob/master/README-CN.md)
 
-Terraform module which creates Memcache and other resources on Alibaba Cloud.
+本 Module 用于在阿里云的 VPC 下创建一个[memcache云数据库](https://help.aliyun.com/product/26528.html)。
 
-These types of resources are supported:
+本 Module 支持创建以下资源:
 
-* [alicloud_kvstore_instance](https://www.terraform.io/docs/providers/alicloud/r/kvstore_instances.html)
-* [alicloud_kvstore_backup_policy](https://www.terraform.io/docs/providers/alicloud/r/kvstore_backup_policy.html)
-* [alicloud_kvstore_account](https://www.terraform.io/docs/providers/alicloud/r/kvstore_account.html)
-* [Alicloud_cms_alarm](https://www.terraform.io/docs/providers/alicloud/r/cms_alarm.html)
+* [Memcache 数据库实例 (memcache_instance)](https://www.terraform.io/docs/providers/alicloud/r/kvstore_instances.html)
+* [Memcache 数据库实例的备份策略 (memcache_backup_policy)](https://www.terraform.io/docs/providers/alicloud/r/kvstore_backup_policy.html)
+* [Memcache 数据库的账号 (memcache_account)](https://www.terraform.io/docs/providers/alicloud/r/kvstore_account.html)
+* [CmsAlarm 云监控实例 (cms_alarm)](https://www.terraform.io/docs/providers/alicloud/r/cms_alarm.html)
 
-## Terraform versions
+## Terraform 版本
 
-This module requires Terraform 0.12 and Terraform Provider Alicloud 1.68.0+.
+本模板要求使用版本 Terraform 0.12 和阿里云 Provider 1.68.0+。
 
-Usage
------
-    
-For new instance
-    
+## 用法
+
+#### 创建新的Memcache实例
+
 ```hcl
 module "memcache" {
   source               = "terraform-alicloud-modules/memcache/alicloud"
@@ -62,7 +59,7 @@ module "memcache" {
 }
 ```
 
-For existing instance 
+### 使用已经存在的Memcache实例
 
 ```hcl
 module "memcache" {
@@ -95,28 +92,27 @@ module "memcache" {
 }
 ```
 
-## Examples
+## 示例
 
-* [complete](https://github.com/terraform-alicloud-modules/terraform-alicloud-memcache/tree/master/examples/complete)
-* [using-existing-memcache-instance](https://github.com/terraform-alicloud-modules/terraform-alicloud-memcache/tree/master/examples/using-existing-memcache-instance)
+* [创建 Memcache 完整示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-memcache/tree/master/examples/complete)
+* [使用已经存在的 Memcache 实例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-memcache/tree/master/examples/using-existing-memcache-instance)
 
-## Notes
+## 注意事项
 
-* This module using AccessKey and SecretKey are from `profile` and `shared_credentials_file`.
-If you have not set them yet, please install [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) and configure it.
+* 本 Module 使用的 AccessKey 和 SecretKey 可以直接从 `profile` 和 `shared_credentials_file` 中获取。如果未设置，可通过下载安装 [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) 后进行配置。
 
-
-Authors
----------
+作者
+-------
 Created and maintained by Yi Jincheng(yi785301535@163.com), He Guimin(@xiaozhu36, heguimin36@163.com)
 
-License
+许可
 ----
 Apache 2 Licensed. See LICENSE for full details.
 
-Reference
+参考
 ---------
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)
 * [Terraform-Provider-Alicloud Docs](https://www.terraform.io/docs/providers/alicloud/index.html)
+
 
