@@ -11,10 +11,6 @@
 * [Memcache 数据库的账号 (memcache_account)](https://www.terraform.io/docs/providers/alicloud/r/kvstore_account.html)
 * [CmsAlarm 云监控实例 (cms_alarm)](https://www.terraform.io/docs/providers/alicloud/r/cms_alarm.html)
 
-## Terraform 版本
-
-本模板要求使用版本 Terraform 0.12 和阿里云 Provider 1.68.0+。
-
 ## 用法
 
 #### 创建新的Memcache实例
@@ -22,7 +18,6 @@
 ```hcl
 module "memcache" {
   source               = "terraform-alicloud-modules/memcache/alicloud"
-  region               = "cn-shanghai"
   #################
   # Memcache Instance
   #################
@@ -64,7 +59,6 @@ module "memcache" {
 ```hcl
 module "memcache" {
   source               = "terraform-alicloud-modules/memcache/alicloud"
-  region               = "cn-shanghai"
   #################
   # Memcache Instance
   #################
@@ -99,7 +93,6 @@ module "memcache" {
 
 ## 注意事项
 
-* 本 Module 使用的 AccessKey 和 SecretKey 可以直接从 `profile` 和 `shared_credentials_file` 中获取。如果未设置，可通过下载安装 [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) 后进行配置。
 
 作者
 -------
