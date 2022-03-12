@@ -1,7 +1,6 @@
 #################
 # Memcache Instance
 #################
-
 output "this_memcache_instance_id" {
   description = "This memcache instance id."
   value       = module.memcache_example.this_memcache_instance_id
@@ -16,6 +15,7 @@ output "this_memcache_instance_class" {
   description = "This memcache instance class."
   value       = module.memcache_example.this_memcache_instance_class
 }
+
 output "this_memcache_instance_availability_zone" {
   description = "The availability zone in which memcache instance."
   value       = module.memcache_example.this_memcache_instance_availability_zone
@@ -45,6 +45,7 @@ output "this_memcache_instance_type" {
   description = "This memcache instance type."
   value       = module.memcache_example.this_memcache_instance_type
 }
+
 output "this_memcache_instance_vswitch_id" {
   description = "The id of vswitch in which memcache instance."
   value       = module.memcache_example.this_memcache_instance_vswitch_id
@@ -69,14 +70,17 @@ output "this_memcache_instance_tags" {
   description = "A mapping of tags to assign to the memcache instance resource."
   value       = module.memcache_example.this_memcache_instance_tags
 }
+
 output "this_memcache_instance_security_ips" {
   description = "List of IP addresses allowed to access all memcache of an instance."
   value       = module.memcache_example.this_memcache_instance_security_ips
 }
+
 output "this_memcache_instance_maintain_start_time" {
   description = "The start time of the operation and maintenance time period of the instance."
   value       = module.memcache_example.this_memcache_instance_maintain_start_time
 }
+
 output "this_memcache_instance_maintain_end_time" {
   description = "The end time of the operation and maintenance time period of the instance."
   value       = module.memcache_example.this_memcache_instance_maintain_end_time
@@ -85,7 +89,6 @@ output "this_memcache_instance_maintain_end_time" {
 ########################
 # memcache backup policy
 ########################
-
 output "this_memcache_instance_backup_policy_backup_period" {
   description = "This Memcache instance backup policy backup period."
   value       = module.memcache_example.this_memcache_instance_backup_policy_backup_period
@@ -99,76 +102,92 @@ output "this_memcache_instance_backup_policy_backup_time" {
 ############
 # cms alarm
 ############
-
 output "this_alarm_rule_id" {
   description = "The ID of the alarm rule."
-  value       = module.memcache_example.this_alarm_rule_id
+  value       = module.use_existing_memcache.this_alarm_rule_id
 }
+
 output "this_alarm_rule_name" {
   description = "The alarm name."
-  value       = module.memcache_example.this_alarm_rule_name
+  value       = module.use_existing_memcache.this_alarm_rule_name
 }
+
 output "this_alarm_rule_project" {
   description = "Monitor project name."
-  value       = module.memcache_example.this_alarm_rule_name
+  value       = module.use_existing_memcache.this_alarm_rule_name
 }
+
 output "this_alarm_rule_metric" {
   description = "Name of the monitoring metrics."
-  value       = module.memcache_example.this_alarm_rule_metric
+  value       = module.use_existing_memcache.this_alarm_rule_metric
 }
+
 output "this_alarm_rule_dimensions" {
   description = "Map of the resources associated with the alarm rule."
-  value       = module.memcache_example.this_alarm_rule_dimensions
+  value       = module.use_existing_memcache.this_alarm_rule_dimensions
 }
+
 output "this_alarm_rule_period" {
   description = "Index query cycle."
-  value       = module.memcache_example.this_alarm_rule_period
+  value       = module.use_existing_memcache.this_alarm_rule_period
 }
+
 output "this_alarm_rule_statistics" {
   description = "Statistical method."
-  value       = module.memcache_example.this_alarm_rule_statistics
+  value       = module.use_existing_memcache.this_alarm_rule_statistics
 }
+
 output "this_alarm_rule_operator" {
   description = "Alarm comparison operator."
-  value       = module.memcache_example.this_alarm_rule_operator
+  value       = module.use_existing_memcache.this_alarm_rule_operator
 }
+
 output "this_alarm_rule_threshold" {
   description = "Alarm threshold value."
-  value       = module.memcache_example.this_alarm_rule_threshold
+  value       = module.use_existing_memcache.this_alarm_rule_threshold
 }
+
 output "this_alarm_rule_triggered_count" {
   description = "Number of trigger alarm."
-  value       = module.memcache_example.this_alarm_rule_triggered_count
+  value       = module.use_existing_memcache.this_alarm_rule_triggered_count
 }
+
 output "this_alarm_rule_contact_groups" {
   description = "List contact groups of the alarm rule."
-  value       = module.memcache_example.this_alarm_rule_contact_groups
+  value       = module.use_existing_memcache.this_alarm_rule_contact_groups
 }
+
 output "this_alarm_rule_silence_time" {
   description = " Notification silence period in the alarm state."
-  value       = module.memcache_example.this_alarm_rule_silence_time
+  value       = module.use_existing_memcache.this_alarm_rule_silence_time
 }
+
 output "this_alarm_rule_notify_type" {
   description = "Notification type."
-  value       = module.memcache_example.this_alarm_rule_notify_type
+  value       = module.use_existing_memcache.this_alarm_rule_notify_type
 }
+
 output "this_alarm_rule_enabled" {
   description = "Whether to enable alarm rule."
-  value       = module.memcache_example.this_alarm_rule_enabled
+  value       = module.use_existing_memcache.this_alarm_rule_enabled
 }
+
 output "this_alarm_rule_webhook" {
   description = "The webhook that is called when the alarm is triggered."
-  value       = module.memcache_example.this_alarm_rule_webhook
+  value       = module.use_existing_memcache.this_alarm_rule_webhook
 }
+
 output "this_alarm_rule_cpu_usage_status" {
   description = "The current alarm cpu usage rule status."
-  value       = module.memcache_example.this_alarm_rule_cpu_usage_status
+  value       = module.use_existing_memcache.this_alarm_rule_cpu_usage_status
 }
+
 output "this_alarm_rule_memory_usage_status" {
   description = "The current alarm memory usage rule status."
-  value       = module.memcache_example.this_alarm_rule_memory_usage_status
+  value       = module.use_existing_memcache.this_alarm_rule_memory_usage_status
 }
+
 output "this_alarm_rule_used_connection_status" {
   description = "The current alarm usage memory rule status."
-  value       = module.memcache_example.this_alarm_rule_used_connection_status
+  value       = module.use_existing_memcache.this_alarm_rule_used_connection_status
 }

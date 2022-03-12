@@ -1,51 +1,70 @@
-variable "region" {
-  default = "cn-shanghai"
+data "alicloud_kvstore_zones" "default" {
+  engine = "Memcache"
 }
-provider "alicloud" {
-  region = var.region
+
+data "alicloud_kvstore_instance_classes" "default" {
+  engine  = "Memcache"
+  zone_id = data.alicloud_kvstore_zones.default.zones.0.id
 }
-data "alicloud_vpcs" "default" {
-  is_default = true
+
+data "alicloud_cms_alarm_contact_groups" "default" {
 }
-data "alicloud_vswitches" "default" {
-  ids = [data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0]
+
+module "vpc" {
+  source             = "alibaba/vpc/alicloud"
+  create             = true
+  vpc_cidr           = "172.16.0.0/16"
+  vswitch_cidrs      = ["172.16.0.0/21"]
+  availability_zones = [data.alicloud_kvstore_zones.default.zones.0.id]
 }
+
 module "memcache_example" {
-  source = "../../"
-  region = var.region
+  source = "../.."
 
-  #################
-  # Memcache Instance
-  #################
+  #alicloud_kvstore_instance
+  create_instance = true
 
-  instance_name     = "myInstance"
-  instance_class    = "memcache.logic.sharding.2g.8db.0rodb.8proxy.default"
-  period            = 1
-  vswitch_id        = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
-  availability_zone = data.alicloud_vswitches.default.vswitches.0.zone_id
-  security_ips      = ["1.1.1.1", "2.2.2.2", "3.3.3.3"]
-  private_ip        = "172.16.0.10"
-  tags = {
-    Env      = "Private"
-    Location = "Secret"
-  }
+  instance_name        = var.instance_name
+  instance_class       = data.alicloud_kvstore_instance_classes.default.instance_classes.0
+  vswitch_id           = module.vpc.this_vswitch_ids[0]
+  availability_zone    = data.alicloud_kvstore_zones.default.zones.0.id
+  security_ips         = var.security_ips
+  instance_charge_type = var.instance_charge_type
+  period               = var.period
+  auto_renew           = var.auto_renew
+  auto_renew_period    = var.auto_renew_period
+  private_ip           = "172.16.0.10"
+  maintain_start_time  = var.maintain_start_time
+  maintain_end_time    = var.maintain_end_time
+  tags                 = var.tags
 
-  #################
-  # Memcache backup_policy
-  #################
+  #alicloud_kvstore_backup_policy
+  backup_policy_backup_period = var.backup_policy_backup_period
+  backup_policy_backup_time   = var.backup_policy_backup_time
 
-  backup_policy_backup_time   = "02:00Z-03:00Z"
-  backup_policy_backup_period = ["Monday", "Wednesday", "Friday"]
+  #alicloud_cms_alarm
+  enable_alarm_rule = false
 
-  #############
-  # cms_alarm
-  #############
+}
 
-  alarm_rule_name            = "CmsAlarmForMemcache"
-  alarm_rule_statistics      = "Average"
-  alarm_rule_period          = 300
-  alarm_rule_operator        = "<="
-  alarm_rule_threshold       = 35
-  alarm_rule_triggered_count = 2
-  alarm_rule_contact_groups  = ["AccCms"]
+module "use_existing_memcache" {
+  source = "../.."
+
+  #alicloud_kvstore_instance
+  create_instance = false
+
+  #alicloud_cms_alarm
+  enable_alarm_rule = var.enable_alarm_rule
+
+  alarm_rule_name               = var.alarm_rule_name
+  existing_instance_id          = module.memcache_example.this_memcache_instance_id
+  alarm_rule_statistics         = var.alarm_rule_statistics
+  alarm_rule_operator           = var.alarm_rule_operator
+  alarm_rule_threshold          = var.alarm_rule_threshold
+  alarm_rule_triggered_count    = var.alarm_rule_triggered_count
+  alarm_rule_period             = var.alarm_rule_period
+  alarm_rule_contact_groups     = data.alicloud_cms_alarm_contact_groups.default.names
+  alarm_rule_silence_time       = var.alarm_rule_silence_time
+  alarm_rule_effective_interval = var.alarm_rule_effective_interval
+
 }
