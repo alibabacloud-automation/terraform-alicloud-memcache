@@ -14,7 +14,6 @@ locals {
 #################
 # Memcache Instance
 #################
-
 output "this_memcache_instance_id" {
   description = "This memcache instance id."
   value       = local.this_instance_id
@@ -29,6 +28,7 @@ output "this_memcache_instance_class" {
   description = "This memcache instance class."
   value       = local.this_memcache_instance_class
 }
+
 output "this_memcache_instance_availability_zone" {
   description = "The availability zone in which memcache instance."
   value       = local.this_memcache_instance_availability_zone
@@ -43,10 +43,12 @@ output "this_memcache_instance_period" {
   description = "The duration that you will buy DB instance."
   value       = concat(alicloud_kvstore_instance.this.*.period, [""])[0]
 }
+
 output "this_memcache_instance_auto_renew" {
   description = "Whether to renewal a DB instance automatically or not."
   value       = concat(alicloud_kvstore_instance.this.*.auto_renew, [""])[0]
 }
+
 output "this_memcache_instance_auto_renew_period" {
   description = "Auto-renewal period of an instance, in the unit of the month."
   value       = concat(alicloud_kvstore_instance.this.*.auto_renew_period, [""])[0]
@@ -56,6 +58,7 @@ output "this_memcache_instance_type" {
   description = "This memcache instance type."
   value       = local.this_memcache_instance_type
 }
+
 output "this_memcache_instance_vswitch_id" {
   description = "The id of vswitch in which memcache instance."
   value       = local.this_memcache_instance_vswitch_id
@@ -80,14 +83,17 @@ output "this_memcache_instance_tags" {
   description = "A mapping of tags to assign to the memcache instance resource."
   value       = alicloud_kvstore_instance.this.*.tags
 }
+
 output "this_memcache_instance_security_ips" {
   description = "List of IP addresses allowed to access all memcache of an instance."
   value       = alicloud_kvstore_instance.this.*.security_ips
 }
+
 output "this_memcache_instance_maintain_start_time" {
   description = "The start time of the operation and maintenance time period of the instance."
   value       = concat(alicloud_kvstore_instance.this.*.maintain_start_time, [""])[0]
 }
+
 output "this_memcache_instance_maintain_end_time" {
   description = "The end time of the operation and maintenance time period of the instance."
   value       = concat(alicloud_kvstore_instance.this.*.maintain_end_time, [""])[0]
@@ -96,16 +102,16 @@ output "this_memcache_instance_maintain_end_time" {
 ################
 #Backup policy
 ################
-
 output "this_memcache_instance_backup_policy_backup_period" {
   description = "This memcache instance backup policy backup period."
-  value       = alicloud_kvstore_backup_policy.this.*.backup_period
+  value       = concat(alicloud_kvstore_backup_policy.this.*.backup_period, [""])[0]
 }
 
 output "this_memcache_instance_backup_policy_backup_time" {
   description = "This Memcache instance backup policy backup time."
   value       = concat(alicloud_kvstore_backup_policy.this.*.backup_time, [""])[0]
 }
+
 ############
 # cms alarm
 ############
@@ -188,14 +194,17 @@ output "this_alarm_rule_webhook" {
   description = "The webhook that is called when the alarm is triggered."
   value       = concat(alicloud_cms_alarm.cpu_usage.*.webhook, [""])[0]
 }
+
 output "this_alarm_rule_cpu_usage_status" {
   description = "The current alarm cpu usage rule status."
   value       = concat(alicloud_cms_alarm.cpu_usage.*.status, [""])[0]
 }
+
 output "this_alarm_rule_memory_usage_status" {
   description = "The current alarm memory usage rule status."
   value       = concat(alicloud_cms_alarm.memory_usage.*.status, [""])[0]
 }
+
 output "this_alarm_rule_used_connection_status" {
   description = "The current alarm usage memory rule status."
   value       = concat(alicloud_cms_alarm.used_connection.*.status, [""])[0]
