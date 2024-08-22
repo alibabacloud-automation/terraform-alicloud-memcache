@@ -1,3 +1,9 @@
+# Deprecated
+
+Thank you for your interest in Alibaba Cloud Terraform Module. Due to the [offline of ApsaraDB for Memcache](https://www.alibabacloud.com/help/en/memcache/product-overview/notice-cloud-database-memcache-version-stops-supporting-public-network-connection), this Module will be out of maintenance as of today and will be officially taken offline in the future. We recommend you to use [terraform-alicloud-redis](https://registry.terraform.io/modules/terraform-alicloud-modules/redis/alicloud) as an alternative. More available Modules can be searched in [Alibaba Cloud Terraform Module](https://registry.terraform.io/browse/modules?provider=alibaba).
+
+Thank you again for your understanding and cooperation.
+
 Terraform module which creates Memcache database on Alibaba Cloud.  
 terraform-alicloud-memcache
 
